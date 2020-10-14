@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import spidev
 import time
 spi = spidev.SpiDev()

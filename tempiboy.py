@@ -10,10 +10,10 @@ def readadc(adcnum):
         return -1
     r = spi.xfer2([1, 8 + adcnum << 4, 0])
     adcout = ((r[1] & 3) << 8) + r[2]
-    print("true reading", adcnum)
+    print("true reading", adcout)
     return adcout
 while True:
-    value = readadc(0)
+    value = readadc(1)
     volts = (value * 3.3) / 1024
     print(volts)
     temperature = volts / (10.0 / 1000)

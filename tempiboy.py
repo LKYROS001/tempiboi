@@ -13,7 +13,7 @@ def readadc(adcnum):
     print("true reading", adcout)
     return adcout
 while True:
-    value = readadc(1)
+    value = readadc(0)
     volts = (value * 3.3) / 1024
     print(volts)
     temperature = volts / (10.0 / 1000)

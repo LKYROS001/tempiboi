@@ -10,7 +10,7 @@ def readadc(adcnum):
         return -1
     r = spi.xfer2([1, 8 + adcnum << 4, 0])
     adcout = ((r[1] & 3) << 8) + r[2]
-    print("true reading", adcout)
+    print("true reading", adcnum)
     return adcout
 while True:
     value = readadc(0)

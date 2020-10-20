@@ -19,7 +19,7 @@ while True:
 
     # create an analog input channel on pin 0
     chan = AnalogIn(mcp, MCP.P0)
-    temperature = chan.voltage / (10.0 / 1000)
+    temperature = (chan.voltage * 100)-273
     print("Raw ADC Value: ", chan.value)
     print("ADC Voltage: " + str(chan.voltage) + "V")
     print("Temp: " + str(temperature) + "C")

@@ -14,8 +14,11 @@ cs = digitalio.DigitalInOut(board.D5)
 # create the mcp object
 mcp = MCP.MCP3008(spi, cs)
 
-
-def fetch_slave:
+while true:
+    x = threading.Thread(target=fetch_slave, args=())
+    x.start()
+    x.join()
+def fetch_slave():
     # create an analog input channel on pin 0
     chan = AnalogIn(mcp, MCP.P0)
     # create an analog input channel on pin 1

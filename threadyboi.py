@@ -14,7 +14,7 @@ cs = digitalio.DigitalInOut(board.D5)
 # create the mcp object
 mcp = MCP.MCP3008(spi, cs)
 
-while true:
+while True:
     x = threading.Thread(target=fetch_slave, args=())
     x.start()
     x.join()

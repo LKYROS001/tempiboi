@@ -20,13 +20,12 @@ def incrementer(num):
     fetch_slave()
 
 def fetch_slave():
+    time.sleep(timer)
     RunTime= time.time()-starter
     # create an analog input channel on pin 1
     chan = AnalogIn(mcp, MCP.P1)
     temperature = ((((chan.value * 1000 * 3.3)/2**16)-500)/10)
     print(round(RunTime,1),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
-    
-    time.sleep(timer)
 def main():
     global starter,mcp,increment,timer,counters
     GPIO.setmode(GPIO.BCM)
@@ -44,8 +43,14 @@ def main():
     GPIO.setup(8,GPIO.OUT)
     print("RunTime\t\tTemp Reading\t\tTemp")
     starter=time.time()
+    
+    RunTime= time.time()-starter
+    # create an analog input channel on pin 1
+    chan = AnalogIn(mcp, MCP.P1)
+    temperature = ((((chan.value * 1000 * 3.3)/2**16)-500)/10)
+    print(round(RunTime,1),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
+    #initial run
     while True:
-        #fetch_slave()
         x = threading.Thread(target=fetch_slave, args=())
         x.start()
         x.join()           

@@ -8,10 +8,11 @@ import RPi.GPIO as GPIO
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 import threading
-increment = 0
+
 
 
 def incrementer(num):
+    global increment,timer,counters
     increment+=1
     if increment > 2:
         increment=0
@@ -27,7 +28,7 @@ def fetch_slave():
     
     time.sleep(timer)
 def main():
-    global starter,mcp,timer,counters
+    global starter,mcp,increment,timer,counters
     GPIO.setmode(GPIO.BCM)
     # create the spi bus
     spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
@@ -36,6 +37,7 @@ def main():
     # create the mcp object
     mcp = MCP.MCP3008(spi, cs)
     counters=[10,5,1]
+    increment = 0
     timer = 10
     GPIO.setup(6,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
     GPIO.add_event_detect(6,GPIO.FALLING,callback=incrementer,bouncetime=300)

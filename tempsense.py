@@ -38,9 +38,9 @@ def main():
     counters=[10,5,1]
     increment = 0
     timer = 10
-    GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
-    GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
-    GPIO.setup(8,GPIO.OUT)
+    GPIO.setup(6,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
+    GPIO.add_event_detect(6,GPIO.FALLING,callback=incrementer,bouncetime=300)
+    #GPIO.setup(8,GPIO.OUT)
     print("RunTime\tTemp Reading\tTemp")
     starter=time.time()
     while True:

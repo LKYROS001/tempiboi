@@ -23,7 +23,7 @@ def fetch_slave():
     # create an analog input channel on pin 0
     chan = AnalogIn(mcp, MCP.P0)
     temperature = ((((chan.value * 1000 * 3.3)/2**16)-500)/10)
-    print(RunTime+"\t"+str(chan.value) +"\t"+ str(temperature) + "C")
+    print(RunTime+"\t"+str(chan.value) +"\t"+ str(round(temperature),2) + "C")
     
     time.sleep(timer)
 def main():

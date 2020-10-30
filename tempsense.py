@@ -11,7 +11,7 @@ import threading
 
 
 
-def incrementer():
+def incrementer(num):
     increment+=1
     if increment > 2:
         increment=0

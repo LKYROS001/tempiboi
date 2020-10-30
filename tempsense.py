@@ -23,10 +23,10 @@ GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
 print("RunTime\tTemp Reading\tTemp")
 starter=time.time()
 def incrementer():
-	if increment==2:
-		increment=0
-	else:
-        increment+=1
+    increment += 1
+    
+	if increment==2:increment=0
+
 
     timer = counters[increment]
     

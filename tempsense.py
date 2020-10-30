@@ -15,6 +15,7 @@ spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
 cs = digitalio.DigitalInOut(board.D5)
 # create the mcp object
 mcp = MCP.MCP3008(spi, cs)
+counters=[10,5,1]
 increment = 0
 timer = 10
 GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
@@ -24,14 +25,8 @@ starter=time.time()
 def incrementer():
 	if increment==2:
 		increment=0
-	else: increment+=1
-	if increment==0: 
-        timer=10
-	if increment==1: 
-        timer=5
-	if increment==2: 
-        timer=1
-
+	else:increment+=1
+	timer = counters[increment]
     fetch_slave()
 
 def fetch_slave():

@@ -24,7 +24,7 @@ def fetch_slave():
     # create an analog input channel on pin 1
     chan = AnalogIn(mcp, MCP.P1)
     temperature = ((((chan.value * 1000 * 3.3)/2**16)-500)/10)
-    print(round(RunTime,0),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
+    print(round(RunTime,1),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
     
     time.sleep(timer)
 def main():
@@ -40,7 +40,7 @@ def main():
     increment = 0
     timer = 10
     GPIO.setup(6,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
-    GPIO.add_event_detect(6,GPIO.FALLING,callback=incrementer,bouncetime=300)
+    GPIO.add_event_detect(6,GPIO.FALLING,callback=incrementer,bouncetime=1000)
     GPIO.setup(8,GPIO.OUT)
     print("RunTime\t\tTemp Reading\t\tTemp")
     starter=time.time()

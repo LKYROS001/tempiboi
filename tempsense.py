@@ -25,7 +25,8 @@ starter=time.time()
 def incrementer():
     increment += 1
     
-	if increment==2:increment=0
+	if increment==2:
+        increment=0
 
 
     timer = counters[increment]

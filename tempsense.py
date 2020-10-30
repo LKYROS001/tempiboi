@@ -28,7 +28,7 @@ def incrementer():
 	if increment == 0: timer = 10
 	if increment == 1: timer = 5
 	if increment == 2: timer = 1
-    fetch_slave():
+    fetch_slave()
 
 def fetch_slave():
     RunTime= time.time()-starter

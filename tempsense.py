@@ -20,8 +20,8 @@ def incrementer():
 
 def fetch_slave():
     RunTime= time.time()-starter
-    # create an analog input channel on pin 0
-    chan = AnalogIn(mcp, MCP.P0)
+    # create an analog input channel on pin 1
+    chan = AnalogIn(mcp, MCP.P1)
     temperature = ((((chan.value * 1000 * 3.3)/2**16)-500)/10)
     print(RunTime,"\t","%.3f" % chan.value ,"\t", "%.3f" % temperature , "C")
     

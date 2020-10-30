@@ -27,7 +27,7 @@ def fetch_slave():
     
     time.sleep(timer)
 def main():
-    global starter
+    global starter,mcp,increment,timer,counters,
     # create the spi bus
     spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
     # create the cs (chip select)

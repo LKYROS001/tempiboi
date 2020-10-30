@@ -25,9 +25,13 @@ def incrementer():
 	if increment==2:
 		increment=0
 	else: increment+=1
-	if increment == 0: timer = 10
-	if increment == 1: timer = 5
-	if increment == 2: timer = 1
+	if increment == 0: 
+        timer = 10
+	if increment == 1: 
+        timer = 5
+	if increment == 2: 
+        timer = 1
+
     fetch_slave()
 
 def fetch_slave():

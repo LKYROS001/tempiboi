@@ -9,19 +9,7 @@ import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 import threading
 
-# create the spi bus
-spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
-# create the cs (chip select)
-cs = digitalio.DigitalInOut(board.D5)
-# create the mcp object
-mcp = MCP.MCP3008(spi, cs)
-counters=[10,5,1]
-increment = 0
-timer = 10
-GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
-GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
-print("RunTime\tTemp Reading\tTemp")
-starter=time.time()
+
 
 def incrementer():
     increment+=1
@@ -39,6 +27,19 @@ def fetch_slave():
     
     time.sleep(timer)
 def main():
+    # create the spi bus
+    spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
+    # create the cs (chip select)
+    cs = digitalio.DigitalInOut(board.D5)
+    # create the mcp object
+    mcp = MCP.MCP3008(spi, cs)
+    counters=[10,5,1]
+    increment = 0
+    timer = 10
+    GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
+    GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
+    print("RunTime\tTemp Reading\tTemp")
+    starter=time.time()
     while True:
         x = threading.Thread(target=fetch_slave, args=())
         x.start()

@@ -38,15 +38,15 @@ def main():
     counters=[10,5,1]
     increment = 0
     timer = 10
-    GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
+    GPIO.setup(5,GPIO.OUT,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
     GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
     print("RunTime\tTemp Reading\tTemp")
     starter=time.time()
     while True:
-        fetch_slave()
-        #x = threading.Thread(target=fetch_slave, args=())
-        #x.start()
-        #x.join()           
+        #fetch_slave()
+        x = threading.Thread(target=fetch_slave, args=())
+        x.start()
+        x.join()           
 
 if __name__ == "__main__":
     try:

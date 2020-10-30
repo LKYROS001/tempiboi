@@ -43,9 +43,10 @@ def main():
     print("RunTime\tTemp Reading\tTemp")
     starter=time.time()
     while True:
-        x = threading.Thread(target=fetch_slave, args=())
-        x.start()
-        x.join()           
+        fetch_slave()
+        #x = threading.Thread(target=fetch_slave, args=())
+        #x.start()
+        #x.join()           
 
 if __name__ == "__main__":
     try:

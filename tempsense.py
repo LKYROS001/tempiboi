@@ -28,7 +28,7 @@ def fetch_slave():
     time.sleep(timer)
 def main():
     global starter,mcp,increment,timer,counters
-    #GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BCM)
     # create the spi bus
     spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
     # create the cs (chip select)
@@ -38,8 +38,8 @@ def main():
     counters=[10,5,1]
     increment = 0
     timer = 10
-    #GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
-    #GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
+    GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 on raspberrypi
+    GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
     print("RunTime\tTemp Reading\tTemp")
     starter=time.time()
     while True:

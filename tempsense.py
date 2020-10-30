@@ -44,7 +44,7 @@ def main():
         x.start()
         x.join()           
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:

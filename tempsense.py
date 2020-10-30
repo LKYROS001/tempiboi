@@ -22,15 +22,12 @@ GPIO.setup(5,GPIO.IN,pull_up_down=GPIO.PUD_UP)#setting up button for channel 5 o
 GPIO.add_event_detect(5,GPIO.FALLING,callback=incrementer,bouncetime=250)
 print("RunTime\tTemp Reading\tTemp")
 starter=time.time()
+
 def incrementer():
-    increment += 1
-    
-	if increment==2:
+    increment+=1
+    if increment > 2:
         increment=0
-
-
     timer = counters[increment]
-    
     fetch_slave()
 
 def fetch_slave():

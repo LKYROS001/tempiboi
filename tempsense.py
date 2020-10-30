@@ -25,8 +25,11 @@ starter=time.time()
 def incrementer():
 	if increment==2:
 		increment=0
-	else:increment+=1
-	timer = counters[increment]
+	else:
+        increment+=1
+
+    timer = counters[increment]
+    
     fetch_slave()
 
 def fetch_slave():

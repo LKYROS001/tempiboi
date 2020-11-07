@@ -54,7 +54,6 @@ def setup():
     pass
 
 
-
 def fetch_scores():
 
     #gets the top 3 results and converts them to a string output
@@ -66,16 +65,14 @@ def fetch_scores():
      
     return datalog
 
-
-def save_data(stamp, run,temp,buz):
-   
-    scores = [0]*20
-    for x in range(1,21):
+def save_data(hours, minutes,seconds,temp):
+    scores = [0]*21
+    for x in range(1,20):
         name = eeprom.read_block(x,4)
-        scores[x-1] =  name
+        scores[x] =  name
     #add new entry to scores
-    data = [stamp,run,100,buz]
-    scores.insert(0,data)
+    data = [hours,minutes,seconds,temp]
+    scores[0] = data
     print(scores)
     i = 1
     #writes scores back to eeprom
@@ -107,12 +104,9 @@ def fetch_slave():
     t = time.localtime()
     print(time.strftime("%H:%M:%S",t),"\t\t",round(RunTime,0),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
 
-    #preparing data for eeprom
-    timestamp =int(mktime(t))
-    #dt = datetime.fromtimestamp(mktime(t))
-    RunTime =int(round(RunTime,0))
+
     temperature = int(round(temperature,1)*10)    #need a float as an int, will take 1 decimal place, times by 10 to get keep decimal when converting to int
-    save_data(timestamp,RunTime,temperature,0)
+    save_data(time.strftime("%H",t),time.strftime("%M",t),time.strftime(":%S",t),temperature)
 
 
 def menu():

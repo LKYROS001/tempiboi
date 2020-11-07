@@ -106,7 +106,7 @@ def fetch_slave():
 
 
     temperature = int(round(temperature,1)*10)    #need a float as an int, will take 1 decimal place, times by 10 to get keep decimal when converting to int
-    save_data(time.strftime("%H",t),time.strftime("%M",t),time.strftime(":%S",t),temperature)
+    save_data(ord(time.strftime("%H",t)),ord(time.strftime("%M",t)),ord(time.strftime(":%S",t)),temperature)
 
 
 def menu():

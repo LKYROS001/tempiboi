@@ -69,6 +69,7 @@ def fetch_scores():
 
 def save_data(stamp, run,temp,buz):
    
+    scores = [0]*20
     for x in range(1,21):
         name = eeprom.read_block(x,4)
         scores[x-1] =  name

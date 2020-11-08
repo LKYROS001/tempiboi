@@ -53,7 +53,6 @@ def setup():
     mcp = MCP.MCP3008(spi, cs)
     pass
 
-
 def fetch_scores():
 
     #gets the top 3 results and converts them to a string output
@@ -61,8 +60,7 @@ def fetch_scores():
     for x in range(1,21):
         name = eeprom.read_block(x,4)
         #score_count[x-1] =  name
-        datalog += name+" "
-     
+        datalog += name+"\n"
     return datalog
 
 def save_data(hours, minutes,seconds,temp):
@@ -84,6 +82,8 @@ def save_data(hours, minutes,seconds,temp):
 def logging():
     global logFlag
     logFlag = not (logFlag)
+    if (logFlag == False):
+        print("monitoring paused")
     pass
 
 def incrementer(num):
@@ -102,23 +102,20 @@ def fetch_slave():
     chan = AnalogIn(mcp, MCP.P1)
     temperature = ((((chan.value * 1000 * 3.3)/2**16)-500)/10)
     t = time.localtime()
-    print(time.strftime("%H:%M:%S",t),"\t\t",round(RunTime,0),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
-
+    now = datetime.now()
+    print(now.strftime("%H:%M:%S"),"\t\t",round(RunTime,0),"\t\t","%.3f" % chan.value ,"\t\t", "%.3f" % temperature , "C")
 
     temperature = int(round(temperature,1)*10)    #need a float as an int, will take 1 decimal place, times by 10 to get keep decimal when converting to int
-    save_data(int(time.strftime("%H",t)),int(time.strftime("%M",t)),int(time.strftime("%S",t)),10)
+    save_data(now.hour,now.minute,now.second,10)
 
 
 def menu():
     global logFlag
     global starter
-   
     starter=time.time()
     while True:
-        print("hello to minitoring system")
-        option = input('press 1 to monitor for 20 seconds or press 2 to view eeprom data\n')
-        if option == "1":
-            os.system('clear')
+        if logFlag:
+            #os.system('clear')
             print("Time\t\tSys Timer\t\tTemp\t\tBuzzer")
             i=0
             while logFlag:
@@ -126,12 +123,9 @@ def menu():
                 x.start()
                 x.join()
                 i+=1
-                if i==2:
+                if i==3:
                     logFlag=False
-        else:
-            print(fetch_scores)
-
-
+            print(fetch_scores())
 
 
 if __name__ == "__main__":
